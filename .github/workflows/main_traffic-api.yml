@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +19,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '8.x'
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
@@ -34,7 +34,7 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'Production'
@@ -51,9 +51,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9478D6475B8F46888F8CF55127F7F055 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_93EB3BBA8341448883400FC853CD8EA2 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4A6351EDA9AC4F88987A41ADAE05A967 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FDCF6327A5DE4A41B299192F0C0D65F1 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_52970588FFBD424FBF4D07B16B01A8CA }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_BAF054EAF3FC431589AEF10A4118A42A }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
